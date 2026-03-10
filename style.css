@@ -15,7 +15,8 @@
   --green:       #16a34a;
   --red:         #dc2626;
   --s1-a: #1d4ed8; --s1-b: #3b82f6;  /* blue  – site    */
-  --s2-a: #6d28d9; --s2-b: #8b5cf6;  /* purple – intent  */
+  --s2-a: #6d28d9; --s2-b: #8b5cf6;  /* purple – overview  */
+  --s2b-a: #0e7490; --s2b-b: #22d3ee; /* teal – deep dive */
   --s3-a: #047857; --s3-b: #10b981;  /* green – category */
   --radius:    12px;
   --radius-sm:  8px;
@@ -267,8 +268,9 @@ select.text-input {
   color: #fff;
 }
 .s1 { background: linear-gradient(135deg, var(--s1-a), var(--s1-b)); }
-.s2 { background: linear-gradient(135deg, var(--s2-a), var(--s2-b)); }
-.s3 { background: linear-gradient(135deg, var(--s3-a), var(--s3-b)); }
+.s2  { background: linear-gradient(135deg, var(--s2-a), var(--s2-b)); }
+.s2b { background: linear-gradient(135deg, var(--s2b-a), var(--s2b-b)); }
+.s3  { background: linear-gradient(135deg, var(--s3-a), var(--s3-b)); }
 
 .s-num {
   font-size: .7rem;
