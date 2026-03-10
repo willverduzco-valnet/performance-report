@@ -116,8 +116,7 @@ body {
 
 .copy-buttons { display: flex; gap: 10px; }
 
-.btn-copy,
-.btn-copy-plain {
+.btn-copy {
   border: none;
   border-radius: var(--radius-sm);
   padding: 8px 16px;
@@ -125,15 +124,10 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background .15s, color .15s;
+  background: var(--accent); color: #fff;
 }
-.btn-copy       { background: var(--accent); color: #fff; }
 .btn-copy:hover { background: var(--accent-dark); }
-
-.btn-copy-plain       { background: var(--card); color: var(--muted); border: 1px solid var(--border); }
-.btn-copy-plain:hover { background: #f8fafc; color: var(--text); }
-
-.btn-copy.copied,
-.btn-copy-plain.copied { background: var(--green); color: #fff; border-color: var(--green); }
+.btn-copy.copied { background: var(--green); color: #fff; }
 
 .btn-send-toggle {
   border: 1px solid var(--border);
@@ -346,7 +340,7 @@ select.text-input {
   .controls-row { flex-direction: column; }
   .btn-generate { width: 100%; text-align: center; }
   .copy-buttons { flex-direction: column; }
-  .btn-copy, .btn-copy-plain { width: 100%; text-align: center; }
+  .btn-copy { width: 100%; text-align: center; }
   .group-metrics td { display: block; width: 100%; padding: 4px 0; }
   .group-metrics tr:first-child td { border-bottom: none; padding-bottom: 0; }
   .group-metrics tr:last-child td  { padding-top: 0; }
