@@ -1,0 +1,353 @@
+/* ============================================================
+   MONTHLY EMAIL REPORT GENERATOR — STYLES
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #f0f2f5;
+  --card:        #ffffff;
+  --border:      #e2e8f0;
+  --text:        #1e293b;
+  --muted:       #64748b;
+  --accent:      #2563eb;
+  --accent-dark: #1d4ed8;
+  --green:       #16a34a;
+  --red:         #dc2626;
+  --s1-a: #1d4ed8; --s1-b: #3b82f6;  /* blue  – site    */
+  --s2-a: #6d28d9; --s2-b: #8b5cf6;  /* purple – intent  */
+  --s3-a: #047857; --s3-b: #10b981;  /* green – category */
+  --radius:    12px;
+  --radius-sm:  8px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-lg: 0 10px 20px rgba(0,0,0,.08), 0 4px 6px rgba(0,0,0,.05);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── App Shell ─────────────────────────────────────────────── */
+.app-container { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+
+.app-header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+  margin: 0 -20px 32px;
+  padding: 36px 40px;
+  color: #fff;
+}
+.app-header h1 { font-size: 1.7rem; font-weight: 700; letter-spacing: -.025em; margin-bottom: 6px; }
+.header-sub    { color: #94a3b8; font-size: .9rem; }
+
+/* ── Controls ──────────────────────────────────────────────── */
+.controls-section {
+  display: none;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
+}
+.controls-section.visible { display: block; }
+
+.controls-row { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+
+.control-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 180px; }
+.control-group label { font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+.text-input {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: .95rem;
+  color: var(--text);
+  background: #f8fafc;
+  outline: none;
+  transition: border-color .15s, background .15s;
+}
+.text-input:focus { border-color: var(--accent); background: #fff; }
+
+.btn-generate {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 22px;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, transform .1s;
+}
+.btn-generate:hover  { background: var(--accent-dark); }
+.btn-generate:active { transform: scale(.98); }
+
+/* ── Error ─────────────────────────────────────────────────── */
+.error-banner {
+  display: none;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: #991b1b;
+  font-size: .88rem;
+  margin-bottom: 20px;
+}
+.error-banner.visible { display: block; }
+
+/* ── Preview ───────────────────────────────────────────────── */
+.preview-section { display: none; }
+.preview-section.visible { display: block; }
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.preview-header h2 { font-size: 1rem; font-weight: 700; }
+
+.copy-buttons { display: flex; gap: 10px; }
+
+.btn-copy,
+.btn-copy-plain {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-size: .83rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.btn-copy       { background: var(--accent); color: #fff; }
+.btn-copy:hover { background: var(--accent-dark); }
+
+.btn-copy-plain       { background: var(--card); color: var(--muted); border: 1px solid var(--border); }
+.btn-copy-plain:hover { background: #f8fafc; color: var(--text); }
+
+.btn-copy.copied,
+.btn-copy-plain.copied { background: var(--green); color: #fff; border-color: var(--green); }
+
+.btn-send-toggle {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-size: .83rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--card);
+  color: var(--muted);
+  transition: background .15s, color .15s, border-color .15s;
+}
+.btn-send-toggle:hover  { background: #f8fafc; color: var(--text); }
+.btn-send-toggle.active { background: #eff6ff; color: var(--accent); border-color: var(--accent); }
+
+/* ── Send Panel ────────────────────────────────────────────── */
+.send-panel {
+  display: none;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  margin-bottom: 16px;
+}
+.send-panel.open { display: block; }
+
+.send-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.send-row .control-group { min-width: 200px; }
+
+.optional { font-weight: 400; color: #94a3b8; text-transform: none; letter-spacing: 0; }
+
+.btn-mailto {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s;
+}
+.btn-mailto:hover { background: var(--accent-dark); }
+
+.send-note { font-size: .78rem; color: #94a3b8; }
+
+/* ── Compare Row (prev month label) ───────────────────────── */
+.compare-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+
+.compare-label {
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--muted);
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* ── Select inputs ────────────────────────────────────────── */
+select.text-input {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M3 4.5L6 8l3-3.5H3z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+/* ── Interpretation text ───────────────────────────────────── */
+.interpretation {
+  font-size: .83rem;
+  color: #475569;
+  font-style: italic;
+  margin: 10px 0 0 0;
+  padding-top: 9px;
+  border-top: 1px solid #e2e8f0;
+  line-height: 1.55;
+}
+
+.email-wrapper {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+/* ============================================================
+   EMAIL BODY STYLES  (also used when copied as rich text)
+   ============================================================ */
+
+.email-body {
+  padding: 36px 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1e293b;
+}
+
+.email-meta {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: .83rem;
+  color: #64748b;
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.email-meta strong { color: #374151; }
+
+.greeting { font-size: 1rem; margin-bottom: 6px; }
+.intro    { color: #475569; font-size: .93rem; margin-bottom: 32px; }
+
+/* ── Email Sections ────────────────────────────────────────── */
+.email-section { margin-bottom: 36px; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+.s1 { background: linear-gradient(135deg, var(--s1-a), var(--s1-b)); }
+.s2 { background: linear-gradient(135deg, var(--s2-a), var(--s2-b)); }
+.s3 { background: linear-gradient(135deg, var(--s3-a), var(--s3-b)); }
+
+.s-num {
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  background: rgba(255,255,255,.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.s-title { font-size: .97rem; font-weight: 700; letter-spacing: -.01em; }
+
+/* ── Site KPI Table ────────────────────────────────────────── */
+.kpi-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.kpi-table tr { border-bottom: 1px solid #f1f5f9; }
+.kpi-table tr:last-child { border-bottom: none; }
+
+.kpi-label { padding: 10px 16px 10px 4px; color: #475569; font-weight: 500; width: 52%; }
+.kpi-value { padding: 10px 16px; font-weight: 700; color: #0f172a; font-size: .97rem; font-variant-numeric: tabular-nums; }
+.kpi-note  { padding: 10px 4px; color: #94a3b8; font-size: .78rem; }
+
+/* ── Section Description ───────────────────────────────────── */
+.s-desc { font-size: .8rem; color: #94a3b8; font-style: italic; margin-bottom: 14px; }
+
+/* ── Group Cards ───────────────────────────────────────────── */
+.group-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.group-card:last-child { margin-bottom: 0; }
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.group-name { font-weight: 700; font-size: .88rem; color: #1e293b; text-transform: capitalize; }
+.group-pill { font-size: .75rem; color: #64748b; background: #e2e8f0; padding: 2px 9px; border-radius: 999px; }
+
+.group-metrics { width: 100%; border-collapse: collapse; }
+.group-metrics td { padding: 5px 8px; vertical-align: top; width: 33.33%; }
+.group-metrics tr:first-child td { padding-bottom: 10px; border-bottom: 1px solid #e2e8f0; }
+.group-metrics tr:last-child  td { padding-top: 10px; }
+
+.m-label {
+  display: block;
+  font-size: .7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 2px;
+}
+.m-value { display: block; font-weight: 700; font-size: .9rem; color: #1e293b; font-variant-numeric: tabular-nums; }
+.m-pct   { display: block; font-size: .73rem; color: #94a3b8; }
+
+/* ── Email Footer ──────────────────────────────────────────── */
+.email-footer { border-top: 1px solid #e2e8f0; padding-top: 18px; margin-top: 8px; }
+.email-footer p { font-size: .75rem; color: #94a3b8; }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .app-header { padding: 24px 20px; }
+  .app-header h1 { font-size: 1.35rem; }
+  .email-body { padding: 24px 16px; }
+  .controls-row { flex-direction: column; }
+  .btn-generate { width: 100%; text-align: center; }
+  .copy-buttons { flex-direction: column; }
+  .btn-copy, .btn-copy-plain { width: 100%; text-align: center; }
+  .group-metrics td { display: block; width: 100%; padding: 4px 0; }
+  .group-metrics tr:first-child td { border-bottom: none; padding-bottom: 0; }
+  .group-metrics tr:last-child td  { padding-top: 0; }
+}

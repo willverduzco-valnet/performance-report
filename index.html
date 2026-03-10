@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Monthly Email Report Generator</title>
+<link rel="stylesheet" href="./style.css"/>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+/* ── Loader / Sign-In Screen ── */
+.loader-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+  background: var(--bg);
+}
+.loader-card {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+.loader-icon { font-size: 52px; margin-bottom: 12px; }
+.loader-card h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.loader-sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 36px;
+}
+.btn-google {
+  background: #fff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+  transition: box-shadow .15s;
+}
+.btn-google:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.28); }
+.loader-error {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 20px;
+  padding: 10px 16px;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 8px;
+  display: none;
+}
+.loader-error.visible { display: block; }
+.loader-spinner {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 16px;
+}
+.loader-spinner.visible { display: flex; }
+.spin-ring {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-label { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+
+<!-- ── Sign-In Screen ── -->
+<div id="loaderScreen" class="loader-screen">
+  <div class="loader-card">
+    <div class="loader-icon">&#x1F4E7;</div>
+    <h1>Monthly Email Report Generator</h1>
+    <p class="loader-sub">Sign in to load article data from Google Sheets and generate a formatted performance email</p>
+    <button class="btn-google" id="signInBtn">&#x1F510; Sign in with Google</button>
+    <div class="loader-error" id="loaderError"></div>
+  </div>
+</div>
+
+<!-- ── Loading Spinner ── -->
+<div id="loaderSpinner" class="loader-spinner">
+  <div class="spin-ring"></div>
+  <div class="spin-label">Loading dashboard...</div>
+</div>
+
+<!-- ── App Shell (hidden until script loads) ── -->
+<div class="app-container" id="appShell" style="display:none;">
+  <header class="app-header">
+    <h1>Monthly Email Report Generator</h1>
+    <p class="header-sub">Select a brand and month to generate a formatted performance email</p>
+  </header>
+
+  <main class="main-content">
+    <!-- ── Loading Indicator (for data fetch) ── -->
+    <div id="loadingIndicator" style="display:none;text-align:center;padding:40px 0;">
+      <div style="display:inline-block;width:40px;height:40px;border:4px solid #e2e8f0;border-top-color:#2563eb;border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+      <p style="color:#64748b;margin-top:12px;font-size:.9rem;">Loading data from Google Sheets...</p>
+    </div>
+
+    <!-- ── Controls ── -->
+    <section class="controls-section" id="controlsSection" style="display:none;">
+      <div class="controls-row">
+        <div class="control-group">
+          <label for="brandSelect">Brand</label>
+          <select id="brandSelect" class="text-input"></select>
+        </div>
+        <div class="control-group">
+          <label for="monthSelect">Report Month</label>
+          <select id="monthSelect" class="text-input"></select>
+        </div>
+        <button class="btn-generate" id="generateBtn">
+          Generate Email &#8595;
+        </button>
+      </div>
+      <div class="compare-row">
+        <span class="compare-label" id="prevMonthLabel"></span>
+      </div>
+    </section>
+
+    <!-- ── Error ── -->
+    <div class="error-banner" id="errorBanner">
+      <span id="errorMessage"></span>
+    </div>
+
+    <!-- ── Email Preview ── -->
+    <section class="preview-section" id="previewSection">
+      <div class="preview-header">
+        <h2>Email Preview</h2>
+        <div class="copy-buttons">
+          <button class="btn-copy" id="copyHtmlBtn">Copy as Rich Text</button>
+          <button class="btn-copy-plain" id="copyPlainBtn">Copy as Plain Text</button>
+          <button class="btn-send-toggle" id="sendToggle">&#9993; Send Email</button>
+        </div>
+      </div>
+      <div class="send-panel" id="sendPanel">
+        <div class="send-row">
+          <div class="control-group">
+            <label for="recipientEmail">To</label>
+            <input type="email" id="recipientEmail" placeholder="recipient@example.com" class="text-input"/>
+          </div>
+          <div class="control-group">
+            <label for="ccEmail">CC <span class="optional">(optional)</span></label>
+            <input type="email" id="ccEmail" placeholder="cc@example.com" class="text-input"/>
+          </div>
+          <button class="btn-mailto" id="mailtoBtn">Open in Email Client &#8594;</button>
+        </div>
+        <div class="send-row" style="margin-bottom:0;">
+          <div class="control-group" style="flex:1;min-width:0;">
+            <label for="emailSubject">Subject</label>
+            <input type="text" id="emailSubject" class="text-input" placeholder="Auto-populated on generate"/>
+          </div>
+        </div>
+        <p class="send-note">Opens your email client with the subject pre-filled and copies the formatted report to your clipboard &mdash; paste it directly into the email body.</p>
+      </div>
+      <div class="email-wrapper">
+        <div class="email-container" id="emailContainer"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+// ── Configuration ──
+var CLIENT_ID = '1026548183269-jebk6532n8767q35il7ruft9fb4rmar6.apps.googleusercontent.com';
+var DRIVE_FILE_ID = '1pYSXXo_vir9OUYLJqoLUot7_QsZBrTiR';
+
+// ── Loader Logic ──
+(function() {
+  var signInBtn = document.getElementById('signInBtn');
+  var loaderScreen = document.getElementById('loaderScreen');
+  var loaderSpinner = document.getElementById('loaderSpinner');
+  var loaderError = document.getElementById('loaderError');
+  var appShell = document.getElementById('appShell');
+
+  function showLoaderError(msg) {
+    loaderError.textContent = msg;
+    loaderError.classList.add('visible');
+  }
+
+  function hideLoaderError() {
+    loaderError.classList.remove('visible');
+  }
+
+  signInBtn.addEventListener('click', function() {
+    hideLoaderError();
+    if (!window.google || !google.accounts) {
+      showLoaderError('Google Sign-In is still loading. Please wait a moment and try again.');
+      return;
+    }
+    var tc = google.accounts.oauth2.initTokenClient({
+      client_id: CLIENT_ID,
+      scope: 'https://www.googleapis.com/auth/spreadsheets.readonly https://www.googleapis.com/auth/drive.readonly',
+      callback: function(resp) {
+        if (resp.error) {
+          showLoaderError('Sign-in failed: ' + resp.error);
+          return;
+        }
+        var accessToken = resp.access_token;
+
+        // Switch to spinner
+        loaderScreen.style.display = 'none';
+        loaderSpinner.classList.add('visible');
+
+        // Fetch private script.js from Google Drive
+        fetch('https://www.googleapis.com/drive/v3/files/' + DRIVE_FILE_ID + '?alt=media', {
+          headers: { Authorization: 'Bearer ' + accessToken }
+        })
+        .then(function(r) {
+          if (!r.ok) throw new Error('Failed to load script (HTTP ' + r.status + '). Make sure the file is shared with your Google account.');
+          return r.text();
+        })
+        .then(function(scriptText) {
+          // Inject the private script
+          var s = document.createElement('script');
+          s.textContent = scriptText;
+          document.head.appendChild(s);
+
+          // Verify it loaded
+          if (typeof window.__emailInit !== 'function') {
+            throw new Error('Script did not initialize correctly (missing __emailInit).');
+          }
+
+          // Hide spinner, show app
+          loaderSpinner.classList.remove('visible');
+          loaderSpinner.style.display = 'none';
+          appShell.style.display = 'block';
+
+          // Hand off to the private script
+          window.__emailInit(accessToken);
+        })
+        .catch(function(e) {
+          loaderSpinner.classList.remove('visible');
+          loaderSpinner.style.display = 'none';
+          loaderScreen.style.display = 'flex';
+          showLoaderError(e.message);
+        });
+      }
+    });
+    tc.requestAccessToken();
+  });
+})();
+</script>
+</body>
+</html>
