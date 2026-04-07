@@ -282,7 +282,7 @@ select.text-input {
 }
 .s-title { font-size: .97rem; font-weight: 700; letter-spacing: -.01em; }
 
-/* ── Site KPI Table ────────────────────────────────────────── */
+/* ── Site KPI Table (legacy, kept for fallback) ───────────── */
 .kpi-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
 .kpi-table tr { border-bottom: 1px solid #f1f5f9; }
 .kpi-table tr:last-child { border-bottom: none; }
@@ -290,6 +290,37 @@ select.text-input {
 .kpi-label { padding: 10px 16px 10px 4px; color: #475569; font-weight: 500; width: 52%; }
 .kpi-value { padding: 10px 16px; font-weight: 700; color: #0f172a; font-size: .97rem; font-variant-numeric: tabular-nums; }
 .kpi-note  { padding: 10px 4px; color: #94a3b8; font-size: .78rem; }
+
+/* ── KPI Benchmark Table (Actual / Target / Delta / Progress / MoM) ── */
+.kpi-bench-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-bench-table thead tr { background: #f1f5f9; }
+.kpi-bench-table th {
+  padding: 6px 10px;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #475569;
+  border-bottom: 2px solid #cbd5e1;
+}
+.kpi-bench-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+.kpi-bench-table tr:last-child td { border-bottom: none; }
+.kpi-bench-table .kb-label { font-weight: 500; color: #475569; text-align: left; }
+.kpi-bench-table .kb-unit  { color: #94a3b8; font-size: .75rem; text-align: left; }
+.kpi-bench-table .kb-num   { text-align: right; font-weight: 700; color: #0f172a; }
+.kpi-bench-table th.kb-label,
+.kpi-bench-table th.kb-unit  { text-align: left; }
+.kpi-bench-table th.kb-num   { text-align: right; }
+.kpi-bench-table .kb-green { color: #166534; }
+.kpi-bench-table .kb-red   { color: #991b1b; }
 
 /* ── Section Description ───────────────────────────────────── */
 .s-desc { font-size: .8rem; color: #94a3b8; font-style: italic; margin-bottom: 14px; }
