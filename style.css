@@ -295,32 +295,30 @@ select.text-input {
 .kpi-bench-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: .85rem;
+  font-size: .82rem;
   font-variant-numeric: tabular-nums;
+  border: 1px solid #b0b8c4;
 }
-.kpi-bench-table thead tr { background: #f1f5f9; }
+.kpi-bench-table thead tr { background: #1e3a5f; }
 .kpi-bench-table th {
-  padding: 6px 10px;
-  font-size: .72rem;
+  padding: 7px 12px;
+  font-size: .78rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #475569;
-  border-bottom: 2px solid #cbd5e1;
+  color: #fff;
+  border: 1px solid #2a4a70;
 }
 .kpi-bench-table td {
-  padding: 8px 10px;
-  border-bottom: 1px solid #f1f5f9;
+  padding: 7px 12px;
+  border: 1px solid #d1d5db;
 }
-.kpi-bench-table tr:last-child td { border-bottom: none; }
-.kpi-bench-table .kb-label { font-weight: 500; color: #475569; text-align: left; }
-.kpi-bench-table .kb-unit  { color: #94a3b8; font-size: .75rem; text-align: left; }
-.kpi-bench-table .kb-num   { text-align: right; font-weight: 700; color: #0f172a; }
+.kpi-bench-table .kb-label { font-weight: 600; color: #1e293b; text-align: left; }
+.kpi-bench-table .kb-unit  { color: #64748b; font-size: .75rem; text-align: left; }
+.kpi-bench-table .kb-num   { text-align: right; font-weight: 700; color: #1e293b; }
 .kpi-bench-table th.kb-label,
 .kpi-bench-table th.kb-unit  { text-align: left; }
 .kpi-bench-table th.kb-num   { text-align: right; }
 .kpi-bench-table .kb-green { color: #166534; }
-.kpi-bench-table .kb-red   { color: #991b1b; }
+.kpi-bench-table .kb-red   { color: #c0392b; }
 
 /* ── Section Description ───────────────────────────────────── */
 .s-desc { font-size: .8rem; color: #94a3b8; font-style: italic; margin-bottom: 14px; }
