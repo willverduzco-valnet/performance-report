@@ -315,8 +315,8 @@ select.text-input {
 .kpi-bench-table .kb-unit  { color: #64748b; font-size: .75rem; text-align: left; }
 .kpi-bench-table .kb-num   { text-align: right; font-weight: 700; color: #1e293b; }
 .kpi-bench-table th.kb-label,
-.kpi-bench-table th.kb-unit  { text-align: left; }
-.kpi-bench-table th.kb-num   { text-align: right; }
+.kpi-bench-table th.kb-unit  { text-align: left; color: #fff; }
+.kpi-bench-table th.kb-num   { text-align: right; color: #fff; }
 .kpi-bench-table .kb-green { color: #166534; }
 .kpi-bench-table .kb-red   { color: #c0392b; }
 
