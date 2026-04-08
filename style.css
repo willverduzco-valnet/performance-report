@@ -320,6 +320,67 @@ select.text-input {
 .kpi-bench-table .kb-green { color: #166534; }
 .kpi-bench-table .kb-red   { color: #c0392b; }
 
+/* ── Toggle Panel ─────────────────────────────────────────── */
+.toggle-panel {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fafbfc;
+}
+.toggle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  cursor: pointer;
+  user-select: none;
+}
+.toggle-title {
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.toggle-arrow {
+  font-size: .75rem;
+  color: var(--muted);
+  transition: transform .2s;
+}
+.toggle-panel.collapsed .toggle-arrow { transform: rotate(-90deg); }
+.toggle-panel.collapsed .toggle-body { display: none; }
+.toggle-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px 16px;
+  padding: 0 14px 10px;
+}
+.toggle-group {
+  border: none;
+  padding: 4px 0;
+  margin: 0;
+}
+.toggle-group legend {
+  font-weight: 600;
+  font-size: .76rem;
+  color: var(--text);
+  padding: 2px 0;
+}
+.toggle-group label {
+  display: block;
+  padding: 1px 0 1px 2px;
+  font-size: .78rem;
+  color: #475569;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.toggle-group label input { margin-right: 5px; vertical-align: middle; }
+.toggle-group--new {
+  margin-top: 2px;
+  padding-top: 6px;
+  border-top: 1px dashed #d1d5db;
+}
+
 /* ── Section Description ───────────────────────────────────── */
 .s-desc { font-size: .8rem; color: #94a3b8; font-style: italic; margin-bottom: 14px; }
 

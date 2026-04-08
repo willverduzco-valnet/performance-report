@@ -137,6 +137,47 @@
       <div class="compare-row">
         <span class="compare-label" id="prevMonthLabel"></span>
       </div>
+
+      <!-- ── Section Toggles ── -->
+      <div class="toggle-panel" id="sectionToggles">
+        <div class="toggle-header" id="toggleHeader">
+          <span class="toggle-title">Report Sections</span>
+          <span class="toggle-arrow" id="toggleArrow">&#9662;</span>
+        </div>
+        <div class="toggle-body" id="toggleBody">
+          <fieldset class="toggle-group">
+            <legend>Section 1: KPI Tracker</legend>
+            <label><input type="checkbox" data-toggle="kpiTable" checked> KPI Summary Table</label>
+            <label><input type="checkbox" data-toggle="productionOverview" checked> Production Overview</label>
+            <label><input type="checkbox" data-toggle="activeSaTarget" checked> Active S/A vs Target</label>
+            <label><input type="checkbox" data-toggle="weekdayWeekend" checked> Weekday vs Weekend</label>
+            <label><input type="checkbox" data-toggle="kpiInterpretation" checked> Interpretation Text</label>
+          </fieldset>
+          <fieldset class="toggle-group">
+            <legend>Section 2</legend>
+            <label><input type="checkbox" data-toggle="segmentOverview" checked> Segment / Brand Overview</label>
+          </fieldset>
+          <fieldset class="toggle-group">
+            <legend>Section 3</legend>
+            <label><input type="checkbox" data-toggle="segmentDeepDive" checked> Segment / Brand Deep Dive</label>
+          </fieldset>
+          <fieldset class="toggle-group">
+            <legend>Section 4</legend>
+            <label><input type="checkbox" data-toggle="intentPerformance" checked> Performance by Intent</label>
+          </fieldset>
+          <fieldset class="toggle-group">
+            <legend>Section 5</legend>
+            <label><input type="checkbox" data-toggle="summaryNextSteps" checked> Summary &amp; Next Steps</label>
+          </fieldset>
+          <fieldset class="toggle-group toggle-group--new">
+            <legend>Additional Components</legend>
+            <label><input type="checkbox" data-toggle="topWriters"> Top Writers</label>
+            <label><input type="checkbox" data-toggle="contentTypeBreakdown"> Content Type by Segment</label>
+            <label><input type="checkbox" data-toggle="eveningDaytime"> Evening vs Daytime</label>
+            <label><input type="checkbox" data-toggle="avdDepth"> AVD &amp; Engagement Depth</label>
+          </fieldset>
+        </div>
+      </div>
     </section>
 
     <!-- ── Error ── -->
@@ -200,6 +241,16 @@ var DRIVE_FILE_ID = '1pYSXXo_vir9OUYLJqoLUot7_QsZBrTiR';
 
   function hideLoaderError() {
     loaderError.classList.remove('visible');
+  }
+
+  // Toggle panel collapse
+  var toggleHeader = document.getElementById('toggleHeader');
+  var togglePanel = document.getElementById('sectionToggles');
+  if (toggleHeader && togglePanel) {
+    togglePanel.classList.add('collapsed'); // start collapsed
+    toggleHeader.addEventListener('click', function() {
+      togglePanel.classList.toggle('collapsed');
+    });
   }
 
   signInBtn.addEventListener('click', function() {
