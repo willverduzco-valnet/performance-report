@@ -299,13 +299,13 @@ select.text-input {
   font-variant-numeric: tabular-nums;
   border: 1px solid #b0b8c4;
 }
-.kpi-bench-table thead tr { background: #1d4ed8; }
+.kpi-bench-table thead tr { background: #191970; }
 .kpi-bench-table th {
   padding: 7px 12px;
   font-size: .78rem;
   font-weight: 700;
   color: #fff;
-  border: 1px solid #1e40af;
+  border: 1px solid #0f0f50;
 }
 .kpi-bench-table td {
   padding: 7px 12px;
