@@ -180,6 +180,7 @@
           </fieldset>
           <fieldset class="toggle-group">
             <legend>Section 2</legend>
+            <label><input type="checkbox" data-toggle="segmentTargetPacing" checked> Segment Target Pacing</label>
             <label><input type="checkbox" data-toggle="segmentOverview" checked> Segment / Brand Overview</label>
           </fieldset>
           <fieldset class="toggle-group">
@@ -200,8 +201,7 @@
             <label><input type="checkbox" data-toggle="contentTypeBreakdown"> Content Type by Segment</label>
             <label><input type="checkbox" data-toggle="eveningDaytime"> Evening vs Daytime</label>
             <label><input type="checkbox" data-toggle="avdDepth"> AVD &amp; Engagement Depth</label>
-            <label><input type="checkbox" data-toggle="dataSourceComparison"> Data Source Comparison</label>
-            <label><input type="checkbox" data-toggle="segmentTargetPacing"> Segment Target Pacing</label>
+            <label><input type="checkbox" data-toggle="dataSourceComparison" checked> Data Source Comparison</label>
           </fieldset>
         </div>
       </div>
@@ -274,7 +274,7 @@ var DRIVE_FILE_ID = '1pYSXXo_vir9OUYLJqoLUot7_QsZBrTiR';
   var toggleHeader = document.getElementById('toggleHeader');
   var togglePanel = document.getElementById('sectionToggles');
   if (toggleHeader && togglePanel) {
-    togglePanel.classList.add('collapsed'); // start collapsed
+    // Panel starts expanded; user can click header to collapse
     toggleHeader.addEventListener('click', function() {
       togglePanel.classList.toggle('collapsed');
     });
