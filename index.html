@@ -130,6 +130,13 @@
             <option value="cip">CIP Actuals</option>
           </select>
         </div>
+        <div class="control-group" id="sessionSourceGroup">
+          <label for="sessionSourceSelect">Session Source</label>
+          <select id="sessionSourceSelect" class="text-input">
+            <option value="sentinel">Sentinel</option>
+            <option value="ga4">GA4</option>
+          </select>
+        </div>
         <button class="btn-generate" id="generateBtn">
           Generate Email &#8595;
         </button>
@@ -175,6 +182,7 @@
             <label><input type="checkbox" data-toggle="contentTypeBreakdown"> Content Type by Segment</label>
             <label><input type="checkbox" data-toggle="eveningDaytime"> Evening vs Daytime</label>
             <label><input type="checkbox" data-toggle="avdDepth"> AVD &amp; Engagement Depth</label>
+            <label><input type="checkbox" data-toggle="dataSourceComparison"> Data Source Comparison</label>
           </fieldset>
         </div>
       </div>
