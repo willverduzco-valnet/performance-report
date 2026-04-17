@@ -145,6 +145,24 @@
         <span class="compare-label" id="prevMonthLabel"></span>
       </div>
 
+      <!-- ── Mid-Month Pacing ── -->
+      <div class="midmonth-row">
+        <label class="midmonth-toggle">
+          <input type="checkbox" id="midMonthCheck"> Mid-month pacing mode
+        </label>
+        <div class="midmonth-dates" id="midMonthDates" style="display:none;">
+          <label>
+            <span>Start</span>
+            <input type="date" id="midMonthStart" class="text-input"/>
+          </label>
+          <label>
+            <span>End</span>
+            <input type="date" id="midMonthEnd" class="text-input"/>
+          </label>
+          <span class="midmonth-hint">Cumulative targets (Sessions, Revenue) are pro-rated to the date range. S/A and SV targets are rates &mdash; not scaled.</span>
+        </div>
+      </div>
+
       <!-- ── Section Toggles ── -->
       <div class="toggle-panel" id="sectionToggles">
         <div class="toggle-header" id="toggleHeader">

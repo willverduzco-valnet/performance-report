@@ -320,6 +320,52 @@ select.text-input {
 .kpi-bench-table .kb-green { color: #166534; }
 .kpi-bench-table .kb-red   { color: #c0392b; }
 
+/* ── Mid-Month Pacing Row ─────────────────────────────────── */
+.midmonth-row {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.midmonth-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+.midmonth-toggle input { cursor: pointer; }
+.midmonth-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+  align-items: flex-end;
+}
+.midmonth-dates label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: .72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+.midmonth-dates input[type="date"] {
+  padding: 6px 10px;
+  font-size: .85rem;
+}
+.midmonth-hint {
+  font-size: .72rem;
+  color: var(--muted);
+  font-style: italic;
+  align-self: center;
+  max-width: 360px;
+  line-height: 1.4;
+}
+
 /* ── Toggle Panel ─────────────────────────────────────────── */
 .toggle-panel {
   margin-top: 12px;
